@@ -324,7 +324,7 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
           {/* Scene styling */}
           <color attach="background" args={["#06070b"]} />
           <fog attach="fog" args={["#06070b", 7, 15]} />
-          <Stars radius={40} depth={18} count={900} factor={2.4} saturation={0} fade speed={0.4} />
+          <Stars radius={40} depth={28} count={1200} factor={2.9} saturation={0} fade speed={0.4} />
 
           {/* Lights */}
           <ambientLight intensity={0.65} />
@@ -339,7 +339,7 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
             fov={42}
             minZ={6.2}
             maxZ={16}
-            padding={1.25}
+            padding={1.12}
             viewport={viewport}
           />
 
@@ -360,7 +360,7 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
 
               {l.label && l.strong && !l.dimmed && (
                 <Html center position={midPos(l.from, l.to)} style={{ pointerEvents: "none" }}>
-                  <div className="rounded-lg border border-white/10 bg-black/70 px-2 py-1 text-[11px] text-white shadow">
+                  <div className="rounded-lg border border-white/10 bg-black/70 px-2 py-1 text-[10px] text-white shadow">
                     {l.label}
                   </div>
                 </Html>

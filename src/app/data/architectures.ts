@@ -38,7 +38,7 @@ export const architectures: Record<string, Architecture> = {
         id: "parent-ui",
         label: "Parent UI (Web)",
         group: "client",
-        position: [-3.2, 0.6, 0],
+        position: [-3.8, 0.6, 0],
         details: {
           role: { en: "Parent-facing interface", nl: "Interface voor ouders" },
           description: {
@@ -66,7 +66,7 @@ export const architectures: Record<string, Architecture> = {
         id: "core",
         label: "Roomie Core (Node/Express)",
         group: "core",
-        position: [-0.2, 0.6, 0],
+        position: [0.3, 0.6, 0],
         details: {
           role: { en: "Main backend service", nl: "Hoofd backend service" },
           description: {
@@ -80,7 +80,7 @@ export const architectures: Record<string, Architecture> = {
         id: "soketi",
         label: "Soketi (WebSockets)",
         group: "core",
-        position: [-0.2, -0.5, 0],
+        position: [0.3, -0.7, 0],
         details: {
           role: { en: "Realtime communication", nl: "Realtime communicatie" },
           description: {
@@ -94,7 +94,7 @@ export const architectures: Record<string, Architecture> = {
         id: "storage",
         label: "Local Storage",
         group: "db",
-        position: [-0.2, -1.6, 0],
+        position: [0.3, -1.6, 0],
         details: {
           role: { en: "Persistent local data", nl: "Persistente lokale data" },
           description: {
@@ -108,7 +108,7 @@ export const architectures: Record<string, Architecture> = {
         id: "media",
         label: "Audio (ffmpeg / mpg123)",
         group: "hardware",
-        position: [2.4, 1.2, 0],
+        position: [2.9, 0.5, 0],
         details: {
           role: { en: "Audio playback subsystem", nl: "Audio-afspeelsubsysteem" },
           description: {
@@ -122,7 +122,7 @@ export const architectures: Record<string, Architecture> = {
         id: "intercom",
         label: "Intercom (USB Mic + Speaker)",
         group: "hardware",
-        position: [2.4, 0.3, 0],
+        position: [3.9, 1.2, 0],
         details: {
           role: { en: "Two-way audio communication", nl: "Tweerichtings-audiocommunicatie" },
           description: {
@@ -136,7 +136,7 @@ export const architectures: Record<string, Architecture> = {
         id: "sensors",
         label: "Sensors (Temp / Light)",
         group: "hardware",
-        position: [2.4, -0.6, 0],
+        position: [2.9, -0.5, 0],
         details: {
           role: { en: "Environmental monitoring", nl: "Omgevingsmonitoring" },
           description: {
@@ -150,7 +150,7 @@ export const architectures: Record<string, Architecture> = {
         id: "camera",
         label: "Camera",
         group: "hardware",
-        position: [2.4, -1.5, 0],
+        position: [2.9, -1.5, 0],
         details: {
           role: { en: "Video input", nl: "Video-invoer" },
           description: {
@@ -164,7 +164,7 @@ export const architectures: Record<string, Architecture> = {
         id: "gcp-vm",
         label: "Google Cloud VM (Intercom)",
         group: "cloud",
-        position: [0.9, 1.7, 0],
+        position: [0.9, 1.9, 0],
         details: {
           role: { en: "Intercom relay", nl: "Intercom-relay" },
           description: {
