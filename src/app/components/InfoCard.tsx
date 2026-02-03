@@ -11,7 +11,7 @@ type InfoCardProps = {
   rows?: Array<{ label: string; value: string }>;
 
   // Mode B (About): list items
-  items?: string[];
+  items?: readonly string[];
 
   // children?: React.ReactNode;
   children?: React.ReactNode;
