@@ -1,8 +1,9 @@
 "use client";
 
-import { Canvas, useThree } from "@react-three/fiber";
-import { Html, Line, OrbitControls, Stars } from "@react-three/drei";
-import React, { useMemo, useState, useEffect } from "react";
+import * as THREE from "three";
+import React, { useMemo, useState, useEffect, useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Html, Line, OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import type { Architecture, ArchNode } from "@/data/architectures";
 import { useI18n } from "@/i18n/i18n";
 
@@ -74,24 +75,29 @@ function useMediaQuery(query: string) {
 }
 
 function FitCamera({
+  cameraRef,
   center,
   bounds,
   fov = 42,
   minZ = 6.2,
   maxZ = 16,
   padding = 1.25,
+  viewport,
 }: {
+  cameraRef: React.RefObject<THREE.PerspectiveCamera>;
   center: Vec3;
   bounds: { minX: number; maxX: number; minY: number; maxY: number };
   fov?: number;
   minZ?: number;
   maxZ?: number;
   padding?: number;
+  viewport: { width: number; height: number };
 }) {
-  const { camera, size } = useThree();
-
   useEffect(() => {
-    const aspect = size.width / Math.max(1, size.height);
+    const camera = cameraRef.current;
+    if (!camera) return;
+
+    const aspect = viewport.width / Math.max(1, viewport.height);
 
     const sizeX = Math.max(0.001, bounds.maxX - bounds.minX);
     const sizeY = Math.max(0.001, bounds.maxY - bounds.minY);
@@ -99,8 +105,8 @@ function FitCamera({
     const vFov = (fov * Math.PI) / 180;
     const hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
 
-    const distY = (sizeY / 2) / Math.tan(vFov / 2);
-    const distX = (sizeX / 2) / Math.tan(hFov / 2);
+    const distY = sizeY / 2 / Math.tan(vFov / 2);
+    const distX = sizeX / 2 / Math.tan(hFov / 2);
 
     const targetZ = clamp(Math.max(distX, distY) * padding, minZ, maxZ);
 
@@ -108,7 +114,7 @@ function FitCamera({
     camera.position.set(center[0], center[1], targetZ);
     camera.lookAt(center[0], center[1], 0);
     camera.updateProjectionMatrix();
-  }, [camera, size.width, size.height, bounds, center, fov, minZ, maxZ, padding]);
+  }, [cameraRef, viewport.width, viewport.height, bounds, center, fov, minZ, maxZ, padding]);
 
   return null;
 }
@@ -176,6 +182,9 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const layoutScale = 1.25;
 
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
+  const [viewport, setViewport] = useState({ width: 1, height: 1 });
+
   const scaledNodes = useMemo(() => {
     return arch.nodes.map((n) => ({
       ...n,
@@ -184,7 +193,7 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
   }, [arch.nodes]);
 
   const nodeById = useMemo(() => {
-    const m = new Map<string, (ArchNode & { _pos: Vec3 })>();
+    const m = new Map<string, ArchNode & { _pos: Vec3 }>();
     for (const n of scaledNodes) m.set(n.id, n);
     return m;
   }, [scaledNodes]);
@@ -218,10 +227,8 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
     };
   }, [scaledNodes]);
 
-  // Focus is either hovered node or selected node
   const focusId = hovered ?? selected?.id ?? null;
 
-  // Build adjacency for quick "connected nodes" detection
   const connectedSet = useMemo(() => {
     if (!focusId) return null;
     const s = new Set<string>([focusId]);
@@ -233,9 +240,6 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
     return s;
   }, [arch.edges, focusId]);
 
-  // Show label rules:
-  // - No focus => show all labels
-  // - Focus => show only focused node + its neighbors
   const shouldShowLabel = (id: string) => {
     if (!connectedSet) return true;
     return connectedSet.has(id);
@@ -248,8 +252,7 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
         const b = nodeById.get(e.to);
         if (!a || !b) return null;
 
-        const isFocusedEdge =
-          focusId != null && (e.from === focusId || e.to === focusId);
+        const isFocusedEdge = focusId != null && (e.from === focusId || e.to === focusId);
 
         const isConnectedEdge =
           connectedSet != null && connectedSet.has(e.from) && connectedSet.has(e.to);
@@ -301,9 +304,18 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
       <div className="h-[340px] sm:h-[380px]">
         <Canvas
           dpr={[1, 2]}
-          camera={{ fov: 42, position: [center[0], center[1], 9] }}
           gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+          onCreated={({ size }) => setViewport({ width: size.width, height: size.height })}
+          onPointerMissed={() => setSelected(null)}
+          onResize={(s) => setViewport({ width: s.width, height: s.height })}
         >
+          <PerspectiveCamera
+            ref={cameraRef}
+            makeDefault
+            fov={42}
+            position={[center[0], center[1], 9]}
+          />
+
           {/* Scene styling */}
           <color attach="background" args={["#06070b"]} />
           <fog attach="fog" args={["#06070b", 7, 15]} />
@@ -315,7 +327,16 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
           <pointLight position={[0, 0, 6]} intensity={0.6} />
 
           {/* Fit camera to layout */}
-          <FitCamera center={center} bounds={bounds} fov={42} minZ={6.2} maxZ={16} padding={1.25} />
+          <FitCamera
+            cameraRef={cameraRef}
+            center={center}
+            bounds={bounds}
+            fov={42}
+            minZ={6.2}
+            maxZ={16}
+            padding={1.25}
+            viewport={viewport}
+          />
 
           {/* Edges */}
           {lines.map((l) => (
