@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio – Interactive & Full-Stack Developer
 
-## Getting Started
+Personal portfolio website showcasing selected projects, case studies, and system architectures.  
+Built with a strong focus on **clean UI systems**, **reusability**, and **real-world engineering thinking**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Overview
+
+This portfolio is not just a visual showcase, but a **structured frontend system** designed to scale:
+
+- Consistent layout primitives across all pages
+- Reusable UI components (headers, cards, dividers)
+- Clear separation between content, layout, and presentation
+- Case studies with real system architecture visualizations
+
+The goal is to reflect how I actually build production-ready applications.
+
+---
+
+## 🧱 Tech Stack
+
+- **Next.js (App Router)**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **Three.js / React Three Fiber**
+- **Docker**
+- **Raspberry Pi / Hardware integration**
+
+---
+
+## 📁 Project Structure (Simplified)
+
+```
+/app
+  /about
+  /projects
+  /projects/[slug]
+  /contact
+
+/components
+  PageSection.tsx
+  PageHeader.tsx
+  Divider.tsx
+  InfoCard.tsx
+  Architecture3D.tsx
+
+/data
+  projects.ts
+  architectures.ts
+
+/i18n
+  i18n.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧩 UI System Philosophy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is built around **layout primitives**, not page-specific hacks.
 
-## Learn More
+### Core primitives:
+- **PageSection** – consistent root section
+- **PageHeader** – shared header system
+- **InfoCard** – flexible content card
+- **Divider** – lightweight visual separator
 
-To learn more about Next.js, take a look at the following resources:
+This keeps the UI predictable, maintainable, and scalable.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧠 Case Studies
 
-## Deploy on Vercel
+Each project page includes:
+- Clear project context
+- Technology stack
+- Personal role & responsibilities
+- Key learnings
+- Interactive 3D system architecture (when relevant)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌍 Internationalization
+
+- Custom lightweight i18n system
+- No hard-coded UI strings
+- Easy to extend languages
+
+---
+
+## 🎯 Goals of This Project
+
+- Demonstrate real frontend architecture skills
+- Show understanding of system design
+- Keep UI clean, calm, and professional
+- Avoid over-engineering
+- Reflect real-world development practices
+
+---
+
+## 🚀 Running Locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open: http://localhost:3000
+
+---
+
+## 📬 Contact
+
+- **Email:** mohamadsamermatar@gmail.com  
+- **LinkedIn:** https://linkedin.com/in/mohamadm/ 
+- **GitHub:** https://github.com/mohamadmatar7
+
+---
+
+## 🧠 Final Note
+
+This portfolio is intentionally minimal, structured, and honest.  
+Every design and architectural decision reflects how I approach real projects.
+
+No fluff. No templates. Just systems.
