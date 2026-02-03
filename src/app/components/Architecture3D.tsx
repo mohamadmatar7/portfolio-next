@@ -183,7 +183,19 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
   const layoutScale = 1.25;
 
   const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
+
+  // Track viewport size for camera fitting
   const [viewport, setViewport] = useState({ width: 1, height: 1 });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const update = () => setViewport({ width: window.innerWidth, height: window.innerHeight });
+    update();
+
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const scaledNodes = useMemo(() => {
     return arch.nodes.map((n) => ({
@@ -305,16 +317,9 @@ export default function Architecture3D({ arch }: { arch: Architecture }) {
         <Canvas
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
-          onCreated={({ size }) => setViewport({ width: size.width, height: size.height })}
           onPointerMissed={() => setSelected(null)}
-          onResize={(s) => setViewport({ width: s.width, height: s.height })}
         >
-          <PerspectiveCamera
-            ref={cameraRef}
-            makeDefault
-            fov={42}
-            position={[center[0], center[1], 9]}
-          />
+          <PerspectiveCamera ref={cameraRef} makeDefault fov={42} position={[center[0], center[1], 9]} />
 
           {/* Scene styling */}
           <color attach="background" args={["#06070b"]} />
