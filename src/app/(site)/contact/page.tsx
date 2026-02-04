@@ -82,10 +82,10 @@ export default function ContactPage() {
 
       <Divider />
 
-      <div className="grid gap-6 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Form */}
         <div className="lg:col-span-8">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-6">
             <p className="text-sm font-semibold text-white/90">{t.contact.formTitle}</p>
 
             <form onSubmit={onSubmit} className="mt-5 space-y-4">
