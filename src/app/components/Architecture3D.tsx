@@ -23,6 +23,8 @@ function groupStyle(group: ArchNode["group"]) {
       return { scale: 1.0, opacity: 0.9 };
     case "db":
       return { scale: 1.0, opacity: 0.9 };
+    case "server":
+      return { scale: 1.0, opacity: 0.9 };
     default:
       return { scale: 1.0, opacity: 0.9 };
   }
@@ -42,6 +44,8 @@ function groupColor(group: ArchNode["group"]) {
       return "#fb7185";
     case "db":
       return "#60a5fa";
+    case "server":
+      return "#f472b6";
     default:
       return "#e5e7eb";
   }

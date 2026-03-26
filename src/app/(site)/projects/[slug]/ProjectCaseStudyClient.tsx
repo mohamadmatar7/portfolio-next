@@ -1,18 +1,41 @@
 "use client";
 
 import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 import { projects } from "@/data/projects";
 import { architectures } from "@/data/architectures";
 import PageSection from "@/components/PageSection";
 import Architecture3D from "@/components/Architecture3D";
+import ArchitectureMobile from "@/components/ArchitectureMobile";
 import PageHeader from "@/components/PageHeader";
 import InfoCard from "@/components/InfoCard";
 import Divider from "@/components/Divider";
 import BackgroundAccents from "@/components/BackgroundAccents";
 import { useI18n } from "@/i18n/i18n";
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia(query);
+    const handleChange = () => setMatches(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener?.("change", handleChange);
+
+    return () => mediaQuery.removeEventListener?.("change", handleChange);
+  }, [query]);
+
+  return matches;
+}
+
 export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
+
   const { lang } = useI18n();
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
 
   const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
@@ -86,7 +109,12 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
             {lang === "en" ? "System Architecture" : "Systeemarchitectuur"}
           </h2>
 
+          {isMobile ? (
+            <ArchitectureMobile arch={architecture} />
+          ) : (
             <Architecture3D arch={architecture} />
+          )}
+
         </div>
       )}
 

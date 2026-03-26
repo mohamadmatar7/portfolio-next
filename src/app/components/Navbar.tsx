@@ -7,6 +7,7 @@ import { useI18n } from "@/i18n/i18n";
 
 const nav = [
   { href: "/projects", key: "projects" as const },
+  { href: "/infrastructure", key: "infrastructure" as const },
   { href: "/about", key: "about" as const },
   { href: "/contact", key: "contact" as const },
 ];

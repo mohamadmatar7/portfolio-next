@@ -6,7 +6,7 @@ export type Lang = "en" | "nl";
 
 const dict = {
   en: {
-    nav: { projects: "Projects", about: "About", contact: "Contact" },
+    nav: { projects: "Projects", infrastructure: "Infrastructure", about: "About", contact: "Contact" },
     ui: {
       switchToNl: "Switch to Dutch (NL)",
       switchToEn: "Switch to English (EN)",
@@ -18,14 +18,14 @@ const dict = {
       ctaProjects: "View projects",
       ctaContact: "Contact",
       availability: "Available for freelance",
-      locationLine: "Brussels (CET)",
+      locationLine: "Ghent (CET)",
       trustLine: "Fast replies • Clear scope • Clean delivery",
       coreStack: "Core stack",
       deliverTitle: "What I deliver",
       deliverText: "Production-ready apps + interactive systems",
       focusTitle: "Focus",
       focusText: "UX polish • Performance • Clean architecture",
-      basedIn: "Based in Brussels",
+      basedIn: "Based in Ghent",
       timezone: "CET",
       socialsLabel: "Social",
     },
@@ -81,7 +81,7 @@ const dict = {
       heading: "Contact",
       subtitle: "Have a project, idea, or collaboration in mind? Send a message.",
       availabilityTag: "Open for freelance",
-      locationTag: "Brussels (CET)",
+      locationTag: "Ghent (CET)",
 
       formTitle: "Send a message",
       name: "Name",
@@ -104,15 +104,160 @@ const dict = {
     arch: {
       heading: "System Architecture",
       hint: "Drag to rotate • Hover nodes • Click for details",
+      hintMob: "Click on nodes for details",
       clear: "Clear",
       dragHint: "Drag to rotate",
       hoverHint: "Hover nodes",
       clickHint: "Click for details",
+      Connections: "Connections",
+    },
+    infra: {
+      heading: "Infrastructure (Vercel + Home Lab)",
+      subtitle:
+        "A portfolio-facing infrastructure view built around a Vercel frontend and a private Raspberry Pi home lab, exposed securely through Cloudflare Tunnel.",
+
+      paragraphs: [
+        "The portfolio frontend is hosted on Vercel using Next.js.",
+        "Behind it, a Raspberry Pi home lab runs a small containerized stack that includes a core API, a Cloudflare tunnel, realtime messaging, and telemetry collection.",
+        "The setup is designed around secure public access, read-only infrastructure endpoints, and clear separation between the presentation layer and the private service layer.",
+        "This page is intended to present operational visibility in a clean way and can later be connected to live system metrics such as CPU, memory, disk usage, and container health.",
+      ],
+
+      badges: {
+        frontend: "Frontend Hosting",
+        source: "Data Source",
+        services: "Services",
+        access: "Public Access",
+        security: "Security",
+      },
+
+      values: {
+        frontend: "Vercel",
+        source: "Raspberry Pi Home Lab",
+        services: "Docker stack (core-api, cloudflared, soketi)",
+        access: "Cloudflare Tunnel",
+        security: "Read-only endpoints + rate limiting",
+      },
+
+      status: {
+        title: "System status",
+        online: "Online",
+        offline: "Offline",
+        latency: "Latency",
+        uptime: "Uptime",
+        updated: "Last updated",
+      },
+
+      ui: {
+        stackTitle: "Stack overview",
+        setupTitle: "Infrastructure Setup",
+        setupHint: "Core infrastructure choices",
+        containersTitle: "Running Services",
+        architectureTitle: "Architecture Flow",
+        whyTitle: "Why this setup?",
+        whyText:
+          "Vercel provides a fast and reliable frontend layer, while the home lab demonstrates secure service exposure, containerized workloads, telemetry collection, and realtime communication in a practical setup.",
+        
+        allServicesRunning: "All core services running",
+        serviceAttention: "Some services need attention",
+        metricsTitle: "Metrics Overview",
+        metricsHint: "Live data from the backend with realtime updates via WebSocket.",
+        containersHint: "Live container state from Docker on the Raspberry Pi.",
+        diagramHint: "A simplified flow of how the frontend, tunnel, API, and realtime services fit together.",
+
+        realtimeConnected: "Realtime connected",
+        realtimePolling: "Polling fallback",
+        hostTitle: "Host",
+        platformTitle: "Platform",
+
+        latencyFast: "Fast",
+        latencyDegraded: "Degraded",
+        latencySlow: "Slow",
+        latencyOffline: "Offline",
+
+        ok: "OK",
+        warn: "WARN",
+        down: "DOWN",
+
+        running: "Running",
+        degraded: "Degraded",
+        stopped: "Stopped",
+
+        loading: "Loading",
+        loadingValue: "Loading...",
+
+        fetchError: "Failed to load live infrastructure data",
+
+        latencyHint: "Browser → Cloudflare → Home Lab",
+        uptimeHint: "Core services uptime",
+
+        cpuTitle: "CPU Usage",
+        cpuHint: "Live CPU usage on the Raspberry Pi",
+
+        tempTitle: "Server Temperature",
+        tempHint: "Current Raspberry Pi temperature",
+
+        ramTitle: "RAM Usage",
+        diskTitle: "Disk Usage",
+
+        used: "Used",
+        free: "Free",
+
+        docker: "Docker",
+        noServiceData: "No service data available.",
+        flow: "Flow",
+      },
+
+      flow: {
+        browser: "Browser",
+        frontend: "Vercel (Next.js)",
+        frontendNote: "Frontend UI",
+
+        browserFrontend: "Browser / Vercel",
+        tunnel: "Cloudflare Tunnel",
+        tunnelNote: "Secure access to the private lab",
+
+        api: "core-api (Node/Express)",
+        apiNote: "Read-only infrastructure endpoints",
+
+        websocket: "soketi (WebSocket)",
+        websocketNote: "Realtime updates",
+
+        pi: "Raspberry Pi",
+        piNote: "System metrics and container status",
+      },
+
+      containers: {
+        coreApi: {
+          name: "core-api (Node / Express)",
+          role: "Backend service exposing read-only infrastructure data for the dashboard and related internal integrations.",
+          ports: "HTTP :3000 (internal)",
+          notes: "Health checks + rate limiting",
+        },
+        cloudflared: {
+          name: "cloudflared (Cloudflare Tunnel)",
+          role: "Provides secure external access to selected internal services without opening router ports.",
+          ports: "Tunnel → core-api / soketi",
+          notes: "Private ingress",
+        },
+        soketi: {
+          name: "soketi (WebSocket)",
+          role: "Handles realtime communication for live dashboard updates and service events.",
+          ports: "WS :6001 (internal)",
+          notes: "Realtime transport",
+        },
+        telemetry: {
+          name: "telemetry-agent",
+          role: "Collects system metrics such as CPU, memory, disk usage, and temperature, then forwards them to the API layer.",
+          ports: "Local exporter",
+          notes: "Metrics collection",
+        },
+      },
     },
   },
 
   nl: {
-    nav: { projects: "Projecten", about: "Over mij", contact: "Contact" },
+    nav: { projects: "Projecten", infrastructure: "Infrastructuur", about: "Over mij", contact: "Contact" },
     ui: {
       switchToNl: "Overschakelen naar Nederlands (NL)",
       switchToEn: "Overschakelen naar Engels (EN)",
@@ -124,14 +269,14 @@ const dict = {
       ctaProjects: "Bekijk projecten",
       ctaContact: "Contact",
       availability: "Beschikbaar voor freelance",
-      locationLine: "Brussel (CET)",
+      locationLine: "Ghent (CET)",
       trustLine: "Snelle reacties • Duidelijke scope • Strakke oplevering",
       coreStack: "Core stack",
       deliverTitle: "Wat ik oplever",
       deliverText: "Productieklare apps + interactieve systemen",
       focusTitle: "Focus",
       focusText: "UX polish • Performance • Schone architectuur",
-      basedIn: "Gevestigd in Brussel",
+      basedIn: "Gevestigd in Ghent",
       timezone: "CET",
       socialsLabel: "Social",
     },
@@ -187,7 +332,7 @@ const dict = {
       heading: "Contact",
       subtitle: "Heb je een project, idee of samenwerking? Stuur een bericht.",
       availabilityTag: "Beschikbaar voor freelance",
-      locationTag: "Brussel (CET)",
+      locationTag: "Ghent (CET)",
 
       formTitle: "Stuur een bericht",
       name: "Naam",
@@ -210,10 +355,158 @@ const dict = {
     arch: {
       heading: "Systeemarchitectuur",
       hint: "Sleep om te roteren • Hover nodes • Klik voor details",
+      hintMob: "Klik op nodes voor details",
       clear: "Wissen",
       dragHint: "Sleep om te roteren",
       hoverHint: "Hover nodes",
       clickHint: "Klik voor details",
+      Connections: "Connecties",
+    },
+    infra: {
+      heading: "Infrastructuur (Vercel + Home Lab)",
+      subtitle:
+        "Een infrastructuuroverzicht voor mijn portfolio, opgebouwd rond een Vercel-frontend en een private Raspberry Pi home lab, veilig toegankelijk via Cloudflare Tunnel.",
+
+      paragraphs: [
+        "De frontend van dit portfolio is gehost op Vercel met Next.js.",
+        "Daarachter draait een Raspberry Pi home lab met een containerized stack, inclusief een core API, Cloudflare tunnel en realtime communicatie.",
+        "De opzet is gericht op veilige publieke toegang, read-only endpoints en een duidelijke scheiding tussen de presentatie-laag en de private service-laag.",
+        "Deze pagina geeft een overzicht van de infrastructuur en is voorbereid om gekoppeld te worden aan live metrics zoals CPU, geheugen, schijfgebruik en containerstatus.",
+      ],
+
+      badges: {
+        frontend: "Frontend Hosting",
+        source: "Data Bron",
+        services: "Services",
+        access: "Publieke Toegang",
+        security: "Beveiliging",
+      },
+
+      values: {
+        frontend: "Vercel",
+        source: "Raspberry Pi Home Lab",
+        services: "Docker stack (core-api, cloudflared, soketi)",
+        access: "Cloudflare Tunnel",
+        security: "Read-only endpoints + rate limiting",
+      },
+
+      status: {
+        title: "Systeemstatus",
+        online: "Online",
+        offline: "Offline",
+        latency: "Latency",
+        uptime: "Uptime",
+        updated: "Laatst bijgewerkt",
+      },
+
+      ui: {
+        stackTitle: "Stack overzicht",
+        setupTitle: "Infrastructuur Setup",
+        setupHint: "Kern infrastructuurkeuzes",
+        containersTitle: "Draaiende Services",
+        architectureTitle: "Architectuur Flow",
+        whyTitle: "Waarom deze setup?",
+        whyText:
+          "Vercel zorgt voor een snelle en stabiele frontend, terwijl het home lab een praktische opzet toont met veilige toegang, containerized services, telemetry en realtime communicatie.",
+
+        
+        allServicesRunning: "Alle kernservices zijn actief",
+        serviceAttention: "Sommige services vragen aandacht",
+
+        metricsTitle: "Metrics Overzicht",
+        metricsHint: "Live data vanuit de backend met realtime updates via WebSocket.",
+        containersHint: "Live containerstatus afkomstig van Docker op de Raspberry Pi.",
+        diagramHint:
+          "Een vereenvoudigde flow van hoe frontend, tunnel, API en realtime services samenwerken.",
+
+        realtimeConnected: "Realtime verbonden",
+        realtimePolling: "Polling fallback",
+        hostTitle: "Host",
+        platformTitle: "Platform",
+
+        latencyFast: "Snel",
+        latencyDegraded: "Vertraagd",
+        latencySlow: "Traag",
+        latencyOffline: "Offline",
+
+        ok: "OK",
+        warn: "WAARSCHUWING",
+        down: "DOWN",
+
+        running: "Actief",
+        degraded: "Beperkt",
+        stopped: "Gestopt",
+
+        loading: "Laden",
+        loadingValue: "Laden...",
+
+        fetchError: "Kon de infrastructuurdata niet laden",
+
+        latencyHint: "Browser → Cloudflare → Home Lab",
+        uptimeHint: "Uptime van de core services",
+
+        cpuTitle: "CPU Gebruik",
+        cpuHint: "Live CPU belasting op de Raspberry Pi",
+
+        tempTitle: "Server Temperatuur",
+        tempHint: "Huidige temperatuur van de Raspberry Pi",
+
+        ramTitle: "RAM Gebruik",
+        diskTitle: "Schijfgebruik",
+
+        used: "Gebruikt",
+        free: "Vrij",
+
+        docker: "Docker",
+        noServiceData: "Geen service data beschikbaar.",
+        flow: "Flow",
+      },
+
+      flow: {
+        browser: "Browser",
+        frontend: "Vercel (Next.js)",
+        frontendNote: "Frontend UI",
+
+        browserFrontend: "Browser / Vercel",
+        tunnel: "Cloudflare Tunnel",
+        tunnelNote: "Veilige toegang tot de private omgeving",
+
+        api: "core-api (Node/Express)",
+        apiNote: "Read-only infrastructuur endpoints",
+
+        websocket: "soketi (WebSocket)",
+        websocketNote: "Realtime updates",
+
+        pi: "Raspberry Pi",
+        piNote: "Systeemmetrics en containerstatus",
+      },
+
+      containers: {
+        coreApi: {
+          name: "core-api (Node / Express)",
+          role: "Backend service die read-only infrastructuurdata beschikbaar maakt voor de dashboardlaag en interne integraties.",
+          ports: "HTTP :3000 (intern)",
+          notes: "Health checks + rate limiting",
+        },
+        cloudflared: {
+          name: "cloudflared (Cloudflare Tunnel)",
+          role: "Zorgt voor veilige externe toegang tot interne services zonder open poorten op de router.",
+          ports: "Tunnel → core-api / soketi",
+          notes: "Private ingress",
+        },
+        soketi: {
+          name: "soketi (WebSocket)",
+          role: "Verwerkt realtime communicatie voor live updates en events in de dashboard.",
+          ports: "WS :6001 (intern)",
+          notes: "Realtime transport",
+        },
+        telemetry: {
+          name: "telemetry-agent",
+          role: "Verzamelt systeemmetrics zoals CPU, geheugen, schijfgebruik en temperatuur en stuurt deze door naar de API.",
+          ports: "Local exporter",
+          notes: "Metrics collection",
+        },
+      },
     },
   },
 } as const;
