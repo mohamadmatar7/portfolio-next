@@ -189,7 +189,8 @@ const dict = {
         fetchError: "Failed to load live infrastructure data",
 
         latencyHint: "Browser → Cloudflare → Home Lab",
-        uptimeHint: "Core services uptime",
+        uptimeTitle: "Service uptime",
+        uptimeHint: "Time since the last restart",
 
         cpuTitle: "CPU Usage",
         cpuHint: "Live CPU usage on the Raspberry Pi",
@@ -206,6 +207,8 @@ const dict = {
         docker: "Docker",
         noServiceData: "No service data available.",
         flow: "Flow",
+        from: "From",
+        to: "To",
       },
 
       flow: {
@@ -443,7 +446,8 @@ const dict = {
         fetchError: "Kon de infrastructuurdata niet laden",
 
         latencyHint: "Browser → Cloudflare → Home Lab",
-        uptimeHint: "Uptime van de core services",
+        uptimeTitle: "Service uptime",
+        uptimeHint: "Tijd sinds de laatste herstart",
 
         cpuTitle: "CPU Gebruik",
         cpuHint: "Live CPU belasting op de Raspberry Pi",
@@ -460,6 +464,8 @@ const dict = {
         docker: "Docker",
         noServiceData: "Geen service data beschikbaar.",
         flow: "Flow",
+        from: "Van",
+        to: "Naar",
       },
 
       flow: {

@@ -60,7 +60,7 @@ export default function MetricsOverview({
         />
 
         <StatCard
-          label={t.infra.status.uptime}
+          label={t.infra.ui.uptimeTitle}
           value={metrics.uptime || "—"}
           hint={t.infra.ui.uptimeHint}
           tone="ok"
