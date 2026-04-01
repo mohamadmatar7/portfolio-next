@@ -46,4 +46,23 @@ export type ServiceStatusLabels = {
   stopped: string;
 };
 
+export type ConnectionInfo = {
+  ipMasked: string;
+  ipSource: string;
+  country: string;
+  region: string;
+  city: string;
+  protocol: string;
+  method: string;
+  userAgent: string;
+  requestId: string;
+  edgeTrace: string;
+  serverTime: string;
+};
+
+export type ConnectionResponse = {
+  status: "ok";
+  connection: ConnectionInfo;
+};
+
 export type I18nText = ReturnType<typeof useI18n>["t"];

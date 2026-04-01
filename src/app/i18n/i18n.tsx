@@ -209,6 +209,25 @@ const dict = {
         flow: "Flow",
         from: "From",
         to: "To",
+
+        inspectConnectionTitle: "Inspect live request",
+        inspectConnectionDescription:
+          "Sends a live request to the API and returns the observed client details captured through the public ingress path.",
+        connectionSnapshotTitle: "Observed request details",
+        connectionSnapshotHint:
+          "Privacy-aware snapshot of how the request is received by the backend.",
+        publicIp: "Public IP",
+        observedFrom: "Observed source",
+        detectedLocation: "Detected location",
+        protocol: "Protocol",
+        method: "Method",
+        requestId: "Request ID",
+        serverTime: "Server time",
+        userAgent: "User agent",
+        edgeTrace: "Edge trace",
+        liveResponse: "Live response",
+        inspecting: "Inspecting...",
+        notAvailable: "Not available",
       },
 
       flow: {
@@ -466,6 +485,25 @@ const dict = {
         flow: "Flow",
         from: "Van",
         to: "Naar",
+
+        inspectConnectionTitle: "Live request inspecteren",
+        inspectConnectionDescription:
+          "Verstuurt een live request naar de API en toont de waargenomen clientgegevens via de publieke toegang.",
+        connectionSnapshotTitle: "Waargenomen requestgegevens",
+        connectionSnapshotHint:
+          "Privacyvriendelijke weergave van hoe het request door de backend wordt ontvangen.",
+        publicIp: "Publiek IP-adres",
+        observedFrom: "Bron van detectie",
+        detectedLocation: "Gedetecteerde locatie",
+        protocol: "Protocol",
+        method: "Methode",
+        requestId: "Request-ID",
+        serverTime: "Servertijd",
+        userAgent: "User agent",
+        edgeTrace: "Edge trace",
+        liveResponse: "Live response",
+        inspecting: "Bezig met inspecteren...",
+        notAvailable: "Niet beschikbaar",
       },
 
       flow: {

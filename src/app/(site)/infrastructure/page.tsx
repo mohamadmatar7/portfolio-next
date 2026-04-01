@@ -8,6 +8,7 @@ import InfrastructureHero from "@/components/infrastructure/InfrastructureHero";
 import MetricsOverview from "@/components/infrastructure/MetricsOverview";
 import ServicesPanel from "@/components/infrastructure/ServicesPanel";
 import ArchitecturePanel from "@/components/infrastructure/ArchitecturePanel";
+import ConnectionInspector from "@/components/infrastructure/ConnectionInspector";
 import { useI18n } from "@/i18n/i18n";
 import { useInfrastructureData } from "./useInfrastructureData";
 import {
@@ -116,6 +117,8 @@ export default function InfrastructurePage() {
           metrics={metrics}
           statusLabels={statusLabels}
         />
+
+        <ConnectionInspector apiUrl={process.env.NEXT_PUBLIC_INFRA_API_URL} />
 
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
