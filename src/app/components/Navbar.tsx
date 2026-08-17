@@ -50,7 +50,7 @@ export default function Navbar() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/10 to-transparent" />
 
       <div className="border-b border-white/5 bg-neutral-950/70 backdrop-blur-xl backdrop-saturate-150">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-8">
           {/* Brand */}
           <Link
             href="/"
