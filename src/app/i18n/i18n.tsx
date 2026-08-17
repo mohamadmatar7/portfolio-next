@@ -71,9 +71,9 @@ const dict = {
     },
     projectsPage: {
       heading: "Projects",
-      subtitle: "Case studies (school & internship)",
+      subtitle: "Selected projects, client work & case studies",
       countLabel: "projects",
-      caseStudiesTag: "Case studies",
+      caseStudiesTag: "Projects & case studies",
       repo: "GitHub",
       live: "Live",
     },
@@ -344,9 +344,9 @@ const dict = {
     },
     projectsPage: {
       heading: "Projecten",
-      subtitle: "Case studies (school & stage)",
+      subtitle: "Geselecteerde projecten, klantwerk & case studies",
       countLabel: "projecten",
-      caseStudiesTag: "Case studies",
+      caseStudiesTag: "Projecten & case studies",
       repo: "GitHub",
       live: "Live",
     },

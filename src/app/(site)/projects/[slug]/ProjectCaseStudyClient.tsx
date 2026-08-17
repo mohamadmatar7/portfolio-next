@@ -32,16 +32,16 @@ function useMediaQuery(query: string) {
 }
 
 export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
-
   const { lang } = useI18n();
   const isMobile = useMediaQuery("(max-width: 767px)");
-
 
   const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
 
   const architecture =
-    slug === "roomie-backend"
+    slug === "knip-en-knap"
+      ? architectures.knipenknap
+      : slug === "roomie-backend"
       ? architectures.roomie
       : slug === "sweetcontrol"
       ? architectures.sweetcontrol
@@ -54,14 +54,14 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
       {/* background accents */}
       <BackgroundAccents />
 
-      {/* Header (consistent with other pages) */}
+      {/* Header */}
       <PageHeader
         as="h1"
         title={project.title[lang]}
         subtitle={project.summary[lang]}
         subtitleClassName="mt-3 max-w-2xl"
         right={
-          (project.links?.repo || project.links?.live) ? (
+          project.links?.repo || project.links?.live ? (
             <div className="flex flex-wrap gap-2">
               {project.links?.repo && (
                 <a
@@ -73,6 +73,7 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
                   GitHub <span aria-hidden className="opacity-70">↗</span>
                 </a>
               )}
+
               {project.links?.live && (
                 <a
                   href={project.links.live}
@@ -114,7 +115,6 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
           ) : (
             <Architecture3D arch={architecture} />
           )}
-
         </div>
       )}
 
@@ -125,7 +125,41 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
         </h2>
 
         <InfoCard>
-          <ul className="max-w-3xl space-y-2 list-disc list-inside text-neutral-300">
+          <ul className="max-w-3xl list-inside list-disc space-y-2 text-neutral-300">
+            {slug === "knip-en-knap" && (
+              <>
+                <li>
+                  {lang === "en"
+                    ? "Designed and developed the complete website for a real barbershop in Ghent"
+                    : "Ontwierp en ontwikkelde de volledige website voor een echte barbershop in Gent"}
+                </li>
+
+                <li>
+                  {lang === "en"
+                    ? "Built a responsive multilingual experience in Dutch and English"
+                    : "Bouwde een responsive meertalige website in het Nederlands en Engels"}
+                </li>
+
+                <li>
+                  {lang === "en"
+                    ? "Implemented technical SEO, metadata, sitemap, robots configuration and multilingual indexing"
+                    : "Implementeerde technische SEO, metadata, sitemap, robots-configuratie en meertalige indexering"}
+                </li>
+
+                <li>
+                  {lang === "en"
+                    ? "Deployed and configured the production website through Cloudflare"
+                    : "Deployde en configureerde de productiewebsite via Cloudflare"}
+                </li>
+
+                <li>
+                  {lang === "en"
+                    ? "Optimized the website for performance, accessibility and mobile usability"
+                    : "Optimaliseerde de website voor performance, toegankelijkheid en mobiel gebruik"}
+                </li>
+              </>
+            )}
+
             {slug === "roomie-backend" && (
               <>
                 <li>
@@ -133,11 +167,13 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
                     ? "Designed and implemented the full backend architecture"
                     : "Ontwierp en implementeerde de volledige backendarchitectuur"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Integrated hardware, sensors and audio pipelines"
                     : "Integreerde hardware, sensoren en audiopipelines"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Focused on privacy-first, local-first system design"
@@ -153,11 +189,13 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
                     ? "Built the realtime control flow (queue + game state)"
                     : "Bouwde de realtime control flow (wachtrij + game state)"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Integrated payments and hardware control"
                     : "Integreerde betalingen en hardware-aansturing"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Connected vision detections with gameplay logic"
@@ -173,16 +211,19 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
                     ? "Developed both the frontend and backend of the school management platform"
                     : "Ontwikkelde zowel de frontend als de backend van het schoolmanagementplatform"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Implemented role-based authentication and authorization (Admin, Principal, Instructor, Teacher, Student)"
                     : "Implementeerde rolgebaseerde authenticatie en autorisatie (Admin, Principal, Instructor, Teacher, Student)"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Designed and built core modules such as students, teachers, courses and lessons"
                     : "Ontwierp en bouwde kernmodules zoals studenten, leerkrachten, vakken en lessen"}
                 </li>
+
                 <li>
                   {lang === "en"
                     ? "Handled database design, validation logic and REST-style controllers"
@@ -201,14 +242,17 @@ export default function ProjectCaseStudyClient({ slug }: { slug: string }) {
         </h2>
 
         <InfoCard>
-          <p className="max-w-3xl text-neutral-300 leading-relaxed">
-            {lang === "en"
+          <p className="max-w-3xl leading-relaxed text-neutral-300">
+            {slug === "knip-en-knap"
+              ? lang === "en"
+                ? "This project gave me practical experience delivering a production website for a real client, from design and development to multilingual SEO, performance optimization, deployment and domain configuration."
+                : "Dit project gaf me praktische ervaring met het opleveren van een productiewebsite voor een echte klant, van design en development tot meertalige SEO, performance-optimalisatie, deployment en domeinconfiguratie."
+              : lang === "en"
               ? "This project strengthened my understanding of system architecture, realtime communication and combining software with physical hardware."
               : "Dit project versterkte mijn inzicht in systeemarchitectuur, realtime communicatie en het combineren van software met fysieke hardware."}
           </p>
         </InfoCard>
       </div>
-
     </PageSection>
   );
 }

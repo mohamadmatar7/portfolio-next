@@ -23,13 +23,111 @@ export type ArchEdge = {
 };
 
 export type Architecture = {
-  id: "roomie" | "sweetcontrol" | "nexted";
+  id: "roomie" | "sweetcontrol" | "nexted" | "knipenknap";
   title: string;
   nodes: ArchNode[];
   edges: ArchEdge[];
 };
 
 export const architectures: Record<string, Architecture> = {
+  knipenknap: {
+    id: "knipenknap",
+    title: "Knip En Knap",
+    nodes: [
+      {
+        id: "visitor",
+        label: "Visitor (Browser)",
+        group: "client",
+        position: [-3.0, 0.5, 0],
+        details: {
+          role: {
+            en: "Website visitor",
+            nl: "Websitebezoeker",
+          },
+          description: {
+            en: "Visitors access the barbershop website from desktop or mobile devices.",
+            nl: "Bezoekers openen de barbershopwebsite via desktop of mobiele apparaten.",
+          },
+          tech: ["Browser", "Mobile", "Desktop"],
+        },
+      },
+      {
+        id: "cloudflare",
+        label: "Cloudflare",
+        group: "cloud",
+        position: [-0.8, 0.5, 0],
+        details: {
+          role: {
+            en: "DNS, CDN and security layer",
+            nl: "DNS-, CDN- en beveiligingslaag",
+          },
+          description: {
+            en: "Handles DNS, HTTPS, caching and global content delivery for the production website.",
+            nl: "Beheert DNS, HTTPS, caching en wereldwijde content delivery voor de productiewebsite.",
+          },
+          tech: ["Cloudflare DNS", "CDN", "SSL / HTTPS", "Caching"],
+        },
+      },
+      {
+        id: "nextjs",
+        label: "Next.js Website",
+        group: "server",
+        position: [1.4, 0.5, 0],
+        details: {
+          role: {
+            en: "Production website",
+            nl: "Productiewebsite",
+          },
+          description: {
+            en: "The multilingual barbershop website is built with Next.js and optimized for SEO, performance and responsive use.",
+            nl: "De meertalige barbershopwebsite is gebouwd met Next.js en geoptimaliseerd voor SEO, performance en responsive gebruik.",
+          },
+          tech: [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "next-intl",
+          ],
+        },
+      },
+      {
+        id: "static-assets",
+        label: "Static Assets",
+        group: "core",
+        position: [3.4, 0.5, 0],
+        details: {
+          role: {
+            en: "Optimized website assets",
+            nl: "Geoptimaliseerde website-assets",
+          },
+          description: {
+            en: "Images, fonts and static resources are served efficiently as part of the production website.",
+            nl: "Afbeeldingen, fonts en statische resources worden efficiënt geserveerd als onderdeel van de productiewebsite.",
+          },
+          tech: ["Next.js Image", "Static Assets", "Web Fonts"],
+        },
+      },
+    ],
+    edges: [
+      {
+        from: "visitor",
+        to: "cloudflare",
+        label: "HTTPS",
+      },
+      {
+        from: "cloudflare",
+        to: "nextjs",
+        label: "CDN / Request",
+      },
+      {
+        from: "nextjs",
+        to: "static-assets",
+        label: "Assets",
+      },
+    ],
+  },
+
   roomie: {
     id: "roomie",
     title: "Roomie",

@@ -8,7 +8,7 @@ export type Project = {
     en: string;
     nl: string;
   };
-  type: "School" | "Stage" | "Personal";
+  type: "School" | "Stage" | "Personal" | "Client";
   tech: string[];
   links?: {
     repo?: string;
@@ -17,6 +17,33 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "knip-en-knap",
+    title: {
+      en: "Knip En Knap - Barbershop Website",
+      nl: "Knip En Knap - Barbershop Website",
+    },
+    summary: {
+      en: "Production website built for a real barbershop in Ghent, with multilingual content, responsive design, SEO optimization and deployment through Cloudflare.",
+      nl: "Productiewebsite gebouwd voor een echte barbershop in Gent, met meertalige content, responsive design, SEO-optimalisatie en deployment via Cloudflare.",
+    },
+    type: "Client",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "next-intl",
+      "SEO",
+      "Cloudflare",
+      "OpenNext",
+      "Google Search Console",
+    ],
+    links: {
+      live: "https://knipenknap.be",
+      repo: "https://github.com/mohamadmatar7/knipenknap"
+    },
+  },
   {
     slug: "roomie-backend",
     title: {

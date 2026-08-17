@@ -9,8 +9,18 @@ import BackgroundAccents from "@/components/BackgroundAccents";
 import { useI18n } from "@/i18n/i18n";
 
 const typeLabel = {
-  en: { School: "School", Stage: "Internship", Personal: "Personal" },
-  nl: { School: "School", Stage: "Stage", Personal: "Persoonlijk" },
+  en: {
+    School: "School",
+    Stage: "Internship",
+    Personal: "Personal",
+    Client: "Client",
+  },
+  nl: {
+    School: "School",
+    Stage: "Stage",
+    Personal: "Persoonlijk",
+    Client: "Klantproject",
+  },
 } as const;
 
 export default function ProjectsPage() {
@@ -40,7 +50,7 @@ export default function ProjectsPage() {
             key={p.slug}
             href={`/projects/${p.slug}`}
             className="group block rounded-2xl border border-white/10 bg-white/5 p-6 transition
-                       hover:bg-white/[0.07] hover:border-white/15
+                       hover:border-white/15 hover:bg-white/[0.07]
                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30
                        focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
           >
@@ -72,9 +82,12 @@ export default function ProjectsPage() {
                         className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-neutral-200 transition hover:bg-white/10 hover:text-white"
                       >
                         {t.projectsPage.repo}
-                        <span aria-hidden className="opacity-70">↗</span>
+                        <span aria-hidden className="opacity-70">
+                          ↗
+                        </span>
                       </a>
                     )}
+
                     {p.links?.live && (
                       <a
                         href={p.links.live}
@@ -84,7 +97,9 @@ export default function ProjectsPage() {
                         className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-neutral-200 transition hover:bg-white/10 hover:text-white"
                       >
                         {t.projectsPage.live}
-                        <span aria-hidden className="opacity-70">↗</span>
+                        <span aria-hidden className="opacity-70">
+                          ↗
+                        </span>
                       </a>
                     )}
                   </div>

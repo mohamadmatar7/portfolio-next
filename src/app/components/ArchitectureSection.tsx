@@ -7,6 +7,7 @@ import { architectures } from "@/data/architectures";
 import { useI18n } from "@/i18n/i18n";
 
 const options = [
+  { id: "knipenknap", label: "Knip En Knap" },
   { id: "roomie", label: "Roomie" },
   { id: "sweetcontrol", label: "SweetControl" },
   { id: "nexted", label: "NextEd" },
@@ -32,7 +33,10 @@ function useMediaQuery(query: string) {
 
 export default function ArchitectureSection() {
   const { t } = useI18n();
-  const [current, setCurrent] = useState<"roomie" | "sweetcontrol" | "nexted">("roomie");
+  const [current, setCurrent] = useState<
+    "knipenknap" | "roomie" | "sweetcontrol" | "nexted"
+  >("roomie");
+
   const isMobile = useMediaQuery("(max-width: 767px)");
 
   return (
